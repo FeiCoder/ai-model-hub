@@ -1,0 +1,24 @@
+server:
+  host: "0.0.0.0"
+  embedding_port: 8050
+  reranker_port: 8051
+
+# Embedding 模型列表
+# 可以配置多个模型，服务启动时会全部加载
+embedding_models:
+  - name: "bge-base-zh"
+    path: "/home/zf/codes/Nutrition_Tools_proj-main/bge-base-zh-v1.5"
+    device: "cuda"
+    default: true
+    workers: 2
+  # - name: "bge-m3"
+  #   path: "/models/bge-m3"
+  #   device: "cuda"
+
+# Reranker 模型列表
+reranker_models:
+  - name: "bge-reranker-v2-m3"
+    path: "/home/zf/models/BAAI/bge-reranker-v2-m3"
+    device: "cuda"
+    default: true
+    workers: 1

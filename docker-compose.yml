@@ -1,0 +1,50 @@
+services:
+  embedding-service:
+    build: .
+    container_name: embedding-service
+    command: python app/embedding/main.py
+    ports:
+      - "8050:8050"
+    volumes:
+      - ./models:/models
+      - ./config/config.yaml:/app/config/config.yaml
+    environment:
+      - CONFIG_PATH=/app/config/config.yaml
+      - PORT=8050
+      - NVIDIA_VISIBLE_DEVICES=all
+      - PYTHONPATH=/app
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    restart: unless-stopped
+
+  reranker-service:
+    build: .
+    container_name: reranker-service
+    command: python app/reranker/main.py
+    ports:
+      - "8051:8051"
+    volumes:
+      - ./models:/models
+      - ./config/config.yaml:/app/config/config.yaml
+    environment:
+      - CONFIG_PATH=/app/config/config.yaml
+      - PORT=8051
+      - NVIDIA_VISIBLE_DEVICES=all
+      - PYTHONPATH=/app
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    restart: unless-stopped
+
+networks:
+  default:
+    name: ai-model-net
