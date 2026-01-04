@@ -7,7 +7,7 @@ server:
 # 可以配置多个模型，服务启动时会全部加载
 embedding_models:
   - name: "bge-base-zh"
-    path: "/home/zf/codes/Nutrition_Tools_proj-main/bge-base-zh-v1.5"
+    path: "/models/bge-base-zh-v1.5"
     device: "cuda"
     default: true
     workers: 2
@@ -18,7 +18,7 @@ embedding_models:
 # Reranker 模型列表
 reranker_models:
   - name: "bge-reranker-v2-m3"
-    path: "/home/zf/models/BAAI/bge-reranker-v2-m3"
+    path: "/models/bge-reranker-v2-m3"
     device: "cuda"
     default: true
     workers: 1
