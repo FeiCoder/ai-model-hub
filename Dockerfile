@@ -43,7 +43,6 @@ ENV UV_HTTP_TIMEOUT=300
 # 注意：torch 仍需官方 cu121 源，其他包可用清华源
 # 添加 -v 参数以显示详细日志
 RUN uv pip install -v . \
-    --extra-index-url https://download.pytorch.org/whl/cu121 \
     --index-url https://pypi.tuna.tsinghua.edu.cn/simple/
 
 # 复制源代码（放最后，避免因代码变更导致重装依赖）
